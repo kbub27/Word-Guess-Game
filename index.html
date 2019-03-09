@@ -12,16 +12,16 @@
 
 <body>
 
-    <div id="container">
+    <div class="header">
+        <h1>
+            Grunge Band Guesser
+        </h1>
+        <p>
+            Press any key to get the game started!
+        </p>
+    </div>
 
-        <div class="header">
-            <h1>
-                Grunge Guesser
-            </h1>
-            <p>
-                Press any key to get the game started!
-            </p>
-        </div>
+    <div id="container">
 
         <div class="content">
             <div>
@@ -34,17 +34,20 @@
                 <p>Losses: <span id="userLosses"> 0 </span></p>
             </div>
             <div>
-                <p>Guesses Remaining: <span id="guessesLeft"></span></p>
+                <p>Already Guessed: <span id="guessesMade"></span></p>
+            </div>
+            <div>
+                <p>Guesses Remaining: <span id="guessesLeft"> 0 </span></p>
             </div>
         </div>
 
     </div>
-    
+
     <div class="footer">
             <footer>Copyright.</footer>
     </div>
 
-<script type="text/javscript" src="assets/javascript/game.js"></script>
+<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 
 </html>
