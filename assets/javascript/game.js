@@ -24,7 +24,11 @@ const game = {
 
         document.onkeyup = function(event) {
             let userGuess = event.key.toLowerCase();
-            game.choices.push(userGuess);
+            
+            if (game.choices.indexOf(userGuess) === -1) {
+                game.choices.push(userGuess);
+                console.log(userGuess);
+            }
         }
     },
 
