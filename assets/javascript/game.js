@@ -17,7 +17,8 @@ const game = {
     generateWord: function() {
         let randNum = Math.floor(Math.random() * bands.length);
         let finalWord = bands[randNum];
-        console.log(finalWord);
+        let finalWordArr = finalWord.split("");
+        console.log(finalWordArr);
     },
 
     userChoice: function() {
