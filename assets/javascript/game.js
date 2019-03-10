@@ -1,39 +1,44 @@
 const bands = ["nirvana", "pearl jam", "soundgarden", "everclear", "flowerhead", "smashing pumpkins", "stone temple pilots", "melvins"];
 
 
-var word = document.getElementById("word");
-var wins = document.getElementById("userWins");
-var losses = document.getElementById("userLosses");
-var alrdy = document.getElementById("guessesMade");
-var remaining = document.getElementById("guessesLeft");
+const shownWord = document.getElementById("word");
+const wins = document.getElementById("userWins");
+const losses = document.getElementById("userLosses");
+const alrdy = document.getElementById("guessesMade");
+const remaining = document.getElementById("guessesLeft");
 
 const game = {
 
     win: 0,
     lose: 0,
     guessesLeft: 0,
-    choices: [],
+    correctChoices: [],
+    guessingWord: "",
+    incorrectChoices: [],
 
-    generateWord: function() {
-        let randNum = Math.floor(Math.random() * bands.length);
-        let finalWord = bands[randNum];
-        let finalWordArr = finalWord.split("");
-        console.log(finalWordArr);
+    generateWord: function () {
+        const randNum = Math.floor(Math.random() * bands.length);
+        this.guessingWord = bands[randNum];
     },
 
-    userChoice: function() {
+    userChoice: function () {
+        const word = this.guessingWord;
 
-        document.onkeyup = function(event) {
+        document.onkeyup = function (event) {
             let userGuess = event.key.toLowerCase();
-            
-            if (game.choices.indexOf(userGuess) === -1) {
-                game.choices.push(userGuess);
-                console.log(userGuess);
-            }
+
+            for (let i = 0; i < word.length; i++) {
+
+                if (userGuess === word.charAt(i)) {
+
+                    if (game.correctChoices.indexOf(userGuess) === -1) {
+                        game.correctChoices.push(userGuess);
+                        console.log(game.correctChoices);
+                    }
+                }
+            };
         }
     },
-
-
 };
 
 game.generateWord();
