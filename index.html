@@ -1,53 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Grunge Guesser</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
 
 <body>
+    <div class="container">
+        <h1>Guess that Grunge Band!</h1>
+        <p>Press any key to get started!</p>
 
-    <div class="header">
-        <h1>
-            Grunge Band Guesser
-        </h1>
-        <p>
-            Press any key to get the game started!
-        </p>
-    </div>
+        <!-- When user presses any key, start game -->
+        <h4>Wins</h4>
+        
+        <div id="totalWins">
 
-    <div id="container">
+        </div>
 
-        <div class="content">
-            <div>
-                <p><span id="word"></span></p>
-            </div>
-            <div>
-                <p>Wins: <span id="userWins"> 0 </span></p>
-            </div>
-            <div>
-                <p>Losses: <span id="userLosses"> 0 </span></p>
-            </div>
-            <div>
-                <p>Already Guessed: <span id="guessesMade"></span></p>
-            </div>
-            <div>
-                <p>Guesses Remaining: <span id="guessesLeft"> 0 </span></p>
-            </div>
+        <h4>Losses</h4>
+
+        <div id="totalLosses">
+
+        </div>
+
+        <h4>Current Word</h4>
+
+        <div id="currentWord">
+
+        </div>
+
+        <h4>Guesses Remaining</h4>
+
+        <div id="remainingGuesses">
+
+        </div>
+
+        <h4>Letters Guessed</h4>
+
+        <div id="guessedLetters">
+
         </div>
 
     </div>
 
-    <div class="footer">
-            <footer>Copyright.</footer>
-    </div>
-
-<script type="text/javascript" src="assets/javascript/game.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>

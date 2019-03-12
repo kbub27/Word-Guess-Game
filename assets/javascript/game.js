@@ -1,47 +1,112 @@
-const bands = ["nirvana", "pearl jam", "soundgarden", "everclear", "flowerhead", "smashing pumpkins", "stone temple pilots", "melvins"];
 
+$(document).ready(function() {
 
-const shownWord = document.getElementById("word");
-const wins = document.getElementById("userWins");
-const losses = document.getElementById("userLosses");
-const alrdy = document.getElementById("guessesMade");
-const remaining = document.getElementById("guessesLeft");
+    var possibleWords =  ["nirvana", "pearl jam", "soundgarden", "everclear",
+    "flowerhead", "smashing pumpkins", "stone temple pilots", "melvins"];
 
-const game = {
+    const maxGuess = 10
+    var pauseGame = false
 
-    win: 0,
-    lose: 0,
-    guessesLeft: 0,
-    correctChoices: [],
-    guessingWord: "",
-    incorrectChoices: [],
+    var guessedLetters = []
+    var guessingWord = []
+    var wordToMatch
+    var numGuess
+    var wins = 0
+    var losses = 0
 
-    generateWord: function () {
-        const randNum = Math.floor(Math.random() * bands.length);
-        this.guessingWord = bands[randNum];
-    },
+    resetGame()
 
-    userChoice: function (keyPress) {
-        const word = this.guessingWord;
-        console.log(word);
-        
-            let userGuess = keyPress.toLowerCase();
-        // LOOP THROUGH ALL LETTERS IN WORD ARRAY
-            for (let i = 0; i < word.length; i++) {
-                // CHECKS USERGUESS AGAINST SPECIFIC CHARACTER IN ARRAY
-                if (userGuess === word.charAt(i)) {
-                    // PUSHES USERGUESS INTO ARRAY IF ITS NOT ALREADY IN THERE
-                    if (game.correctChoices.indexOf(userGuess) === -1) {
-                        game.correctChoices.push(userGuess);
-                        console.log(game.correctChoices);
-                    } 
-                // PUSHES INCORRECT CHOICES INTO THEIR OWN ARRAY
-                } 
-            };
-    },
-};
+    // Wait for key press
+    document.onkeypress = function(event) {
+        // Make sure key pressed is an alpha character
+        if (isAlpha(event.key) && !pauseGame) {
+            checkForLetter(event.key.toUpperCase())
+        }
+    }
 
-game.generateWord();
-document.onkeyup = function (event) {
-    game.userChoice(event.key);
-}
+    // Game Functions
+    // Check if letter is in word & process
+    function checkForLetter(letter) {
+        var foundLetter = false
+        var correctSound = document.createElement("audio")
+        var incorrectSound = document.createElement("audio")
+        correctSound.setAttribute("src", "assets/sounds/stairs.mp3")
+        incorrectSound.setAttribute("src","assets/sounds/croak.mp3")
+
+        // Search string for letter
+        for (var i=0, j= wordToMatch.length; i<j; i++) {
+            if (letter === wordToMatch[i]) {
+                guessingWord[i] = letter
+                foundLetter = true
+                correctSound.play()
+                // If guessing word matches random word
+                if (guessingWord.join("") === wordToMatch) {
+                    // Increment # of wins
+                    wins++
+                    pauseGame = true
+                    updateDisplay()
+                    setTimeout(resetGame,5000)
+                }
+            }
+        }
+
+        if (!foundLetter) {
+            incorrectSound.play()
+            // Check if inccorrect guess is already on the list
+            if (!guessedLetters.includes(letter)) {
+                // Add incorrect letter to guessed letter list
+                guessedLetters.push(letter)
+                // Decrement the number of remaining guesses
+                numGuess--
+            }
+            if (numGuess === 0) {
+                // Display word before reseting game
+                guessingWord = wordToMatch.split()
+                pauseGame = true
+                losses++
+                setTimeout(resetGame, 5000)
+            }
+        }
+
+        updateDisplay()
+
+    }
+    // Check in keypressed is between A-Z or a-z
+    function isAlpha (ch){
+        return /^[A-Z]$/i.test(ch);
+    }
+
+    function resetGame() {
+        numGuess = maxGuess
+        pauseGame = false
+
+        // Get a new word
+        wordToMatch = possibleWords[Math.floor(Math.random() * possibleWords.length)].toUpperCase()
+        console.log(wordToMatch)
+
+        // Reset word arrays
+        guessedLetters = []
+        guessingWord = []
+
+        // Reset the guessed word
+        for (var i=0, j=wordToMatch.length; i < j; i++){
+            // Put a space instead of an underscore between multi word "words"
+            if (wordToMatch[i] === " ") {
+                guessingWord.push(" ")
+            } else {
+                guessingWord.push("_")
+            }
+        }
+
+        // Update the Display
+        updateDisplay()
+    }
+
+    function updateDisplay () {
+        document.getElementById("totalWins").innerText = wins
+        document.getElementById("totalLosses").innerText = losses
+        document.getElementById("currentWord").innerText = guessingWord.join("")
+        document.getElementById("remainingGuesses").innerText = numGuess
+        document.getElementById("guessedLetters").innerText =  guessedLetters.join(" ")
+    }
+})
