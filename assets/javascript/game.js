@@ -21,25 +21,27 @@ const game = {
         this.guessingWord = bands[randNum];
     },
 
-    userChoice: function () {
+    userChoice: function (keyPress) {
         const word = this.guessingWord;
-
-        document.onkeyup = function (event) {
-            let userGuess = event.key.toLowerCase();
-
+        console.log(word);
+        
+            let userGuess = keyPress.toLowerCase();
+        // LOOP THROUGH ALL LETTERS IN WORD ARRAY
             for (let i = 0; i < word.length; i++) {
-
+                // CHECKS USERGUESS AGAINST SPECIFIC CHARACTER IN ARRAY
                 if (userGuess === word.charAt(i)) {
-
+                    // PUSHES USERGUESS INTO ARRAY IF ITS NOT ALREADY IN THERE
                     if (game.correctChoices.indexOf(userGuess) === -1) {
                         game.correctChoices.push(userGuess);
                         console.log(game.correctChoices);
-                    }
-                }
+                    } 
+                // PUSHES INCORRECT CHOICES INTO THEIR OWN ARRAY
+                } 
             };
-        }
     },
 };
 
 game.generateWord();
-game.userChoice();
+document.onkeyup = function (event) {
+    game.userChoice(event.key);
+}
