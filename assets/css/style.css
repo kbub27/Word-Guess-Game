@@ -1,0 +1,24 @@
+body {
+    height: 100%;
+    background-image: url(../images/grunge1.jpg);
+    background-repeat: repeat;
+    background-size: 100%;
+    color: red;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.guess {
+    padding: 10px;
+    margin: 5px;
+}
+
+#currentWord {
+    padding: 10px;
+    margin: 5px;
+    letter-spacing: 10px;
+    font-size: 24px;
+}
